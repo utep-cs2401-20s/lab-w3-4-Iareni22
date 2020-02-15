@@ -8,17 +8,19 @@ public class GameOfLife {
     public GameOfLife() {}
 
     public GameOfLife(int s){
-        size = s;
-        board = new int[size][size];
-        previous = new int[size][size];
+        this.size = s;
+        this.board = new int[size][size];
+        this.previous = new int[size][size];
     }
 
     public GameOfLife(int[][] array){
-        this.size = board.length;
+        this.size = array.length;
         this.previous = new int[size][size];
+        this.board = new int[size][size];
         for(int i = 0; i < size; i++){
-            for(int j = 0; i < array[0].length; j++){
+            for(int j = 0; j < array[0].length; j++){
                 this.previous[i][j] = array[i][j];
+                this.board[i][j] = array[i][j];
             }
         }
     }
@@ -31,7 +33,7 @@ public class GameOfLife {
     public void oneStep(){
         int numNeigh;
         for(int i = 0; i < size; i++) {
-            for (int j = 0; i < size; j++) {
+            for (int j = 0; j < size; j++) {
                 numNeigh = neighbors(i, j);
                 if(previous[i][j] == 0){
                     if (numNeigh == 2 || numNeigh == 3)
@@ -48,7 +50,7 @@ public class GameOfLife {
             }
         }
         for(int i = 0; i < board.length; i++){
-            for(int j = 0; i < board[i].length; j++){
+            for(int j = 0; j < board[i].length; j++){
                 previous[i][j] = board[i][j];
             }
         }
@@ -92,7 +94,7 @@ public class GameOfLife {
 
     public void printBoard(){
         for(int i = 0; i < size; i++){
-            for(int j = 0; i < size; j++){
+            for(int j = 0; j < size; j++){
                 System.out.print(board[i][j] + " ");
             }
             System.out.println();

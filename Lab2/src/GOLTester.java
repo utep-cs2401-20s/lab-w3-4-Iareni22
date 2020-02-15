@@ -19,12 +19,26 @@ public class GOLTester {
                     {0, 0, 0},
                     {0, 0, 0}};
         // Declare and initialize instance of GOL (Remember that you guys will only test TORUS GOL, not the regular one)
-        GameOfLife x = new GameOfLife(A); // Use the constructor that takes in an array
+        TorusGameOfLife x = new TorusGameOfLife(A); // Use the constructor that takes in an array
         // Call evolution method for the instance to compute n evolutions. In this test, we only compute 1.
         x.evolution(1);
         // assert that your expected (array B) is equal to the actual (board of instance)
 
         assertArrayEquals(B, x.getBoard());
+
+    }
+    // Torus test cases
+    /*
+    Test cases for OneStep ---------------------------------------------------------------------------------------------
+     */
+
+    /*
+     * oneStep:
+     * Test case 2:
+     * oneStep() → exp
+     */
+    @Test
+    public void oneStep(){
 
     }
 }
