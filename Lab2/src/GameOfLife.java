@@ -1,5 +1,5 @@
 public class GameOfLife {
-    
+
     int size;
     int[][] board;
     int[][] previous;
@@ -13,12 +13,12 @@ public class GameOfLife {
         previous = new int[size][size];
     }
 
-    public GameOfLife(int[][] board){
-        size = board.length;
-        previous = new int[size][size];
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; i < board[i].length; j++){
-                previous[i][j] = board[i][j];
+    public GameOfLife(int[][] array){
+        this.size = board.length;
+        this.previous = new int[size][size];
+        for(int i = 0; i < size; i++){
+            for(int j = 0; i < array[0].length; j++){
+                this.previous[i][j] = array[i][j];
             }
         }
     }
@@ -57,28 +57,28 @@ public class GameOfLife {
 
     public int neighbors(int row, int col){ // count live neighbors
         int count = 0;
-        if(row - 1 >= 0 && col - 1 >=0 && board[row -1][col - 1] == 1){
+        if(row - 1 >= 0 && col - 1 >=0 && previous[row -1][col - 1] == 1){
             count++;
         }
         if(row - 1 >= 0 && previous[row -1][col] == 1){
             count++;
         }
-        if(row - 1 >= 0 && col + 1 < board.length && board[row - 1][col + 1] == 1){
+        if(row - 1 >= 0 && col + 1 < previous.length && previous[row - 1][col + 1] == 1){
             count++;
         }
-        if(col - 1 >= 0 && board[row][col - 1] == 1){
+        if(col - 1 >= 0 && previous[row][col - 1] == 1){
             count++;
         }
-        if(col + 1 < board.length && board[row][col + 1] == 1){
+        if(col + 1 < previous.length && previous[row][col + 1] == 1){
             count++;
         }
-        if (row + 1 < board.length && col - 1 >= 0 && board[row + 1][col - 1] == 1) {
+        if (row + 1 < previous.length && col - 1 >= 0 && previous[row + 1][col - 1] == 1) {
             count++;
         }
-        if(row + 1 >= 0 && board[row + 1][col] == 1){
+        if(row + 1 >= 0 && previous[row + 1][col] == 1){
             count++;
         }
-        if(row + 1 < board.length && col + 1 < board.length && previous[row + 1][col + 1] == 1){
+        if(row + 1 < previous.length && col + 1 < previous.length && previous[row + 1][col + 1] == 1){
             count++;
         }
         return count;
@@ -93,15 +93,14 @@ public class GameOfLife {
     public void printBoard(){
         for(int i = 0; i < size; i++){
             for(int j = 0; i < size; j++){
-                System.out.print(board[i][j]);
-                if(j == size - 1)
-                    System.out.println();
+                System.out.print(board[i][j] + " ");
             }
+            System.out.println();
         }
     }
 
     public int isAlive(int row, int col){
-        if(board[row][col] == 1)
+        if(previous[row][col] == 1)
             return 1;
         else
             return 0;
