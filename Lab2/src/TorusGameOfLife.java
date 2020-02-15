@@ -19,8 +19,21 @@ public class TorusGameOfLife extends GameOfLife{
         if(row - 1 >= 0 && col - 1 >=0 && previous[row -1][col - 1] == 1){
             count++;
         }
-        else if(row - 1 < 0 && col - 1 < 0 && previous[previous.length - 1][previous.length - 1] == 1){
-            count++;
+        else if (row - 1 < 0){
+            if(col - 1 < 0 && previous[previous.length - 1][previous.length - 1] == 1) {
+                count++;
+            }
+            else if(col - 1 >= 0 && previous[previous.length - 1][col - 1] == 1){
+                count++;
+            }
+        }
+        else if (col - 1 < 0){
+            if(row - 1 < 0 && previous[previous.length - 1][previous.length - 1] == 1) {
+                count++;
+            }
+            else if(row - 1 >= 0 && previous[row - 1][previous.length - 1] == 1){
+                count++;
+            }
         }
         //checks top
         if(row - 1 >= 0 && previous[row -1][col] == 1){
@@ -33,8 +46,21 @@ public class TorusGameOfLife extends GameOfLife{
         if(row - 1 >= 0 && col + 1 < previous.length && previous[row - 1][col + 1] == 1){
             count++;
         }
-        else if(row - 1 < 0 && col + 1 == previous.length && previous[previous.length - 1][0] == 1){
-            count++;
+        else if(row - 1 < 0){
+            if(col + 1 == previous.length && previous[previous.length - 1][0] == 1) {
+                count++;
+            }
+            else if(col + 1 < previous.length && previous[previous.length - 1][col + 1] == 1){
+                count++;
+            }
+        }
+        else if(col + 1 == previous.length){
+            if(row - 1 < 0 && previous[previous.length - 1][0] == 1) {
+                count++;
+            }
+            else if(row - 1 >= 0 && previous[row - 1][0] == 1){
+                count++;
+            }
         }
         //checks left
         if(col - 1 >= 0 && previous[row][col - 1] == 1){
@@ -54,8 +80,21 @@ public class TorusGameOfLife extends GameOfLife{
         if (row + 1 < previous.length && col - 1 >= 0 && previous[row + 1][col - 1] == 1) {
             count++;
         }
-        else if (row + 1 == previous.length && col - 1 < 0 && previous[0][previous.length - 1] == 1) {
-            count++;
+        else if (row + 1 == previous.length){
+            if(col - 1 < 0 && previous[0][previous.length - 1] == 1) {
+                count++;
+            }
+            else if(col - 1 >= 0 && previous[0][col - 1] == 1){
+                count++;
+            }
+        }
+        else if (col - 1 < 0){
+            if(row + 1 == previous.length && previous[0][previous.length - 1] == 1) {
+                count++;
+            }
+            else if(row + 1 < previous.length && previous[row + 1][previous.length - 1] == 1){
+                count++;
+            }
         }
         //checks bottom
         if(row + 1 < previous.length && previous[row + 1][col] == 1){
@@ -68,8 +107,21 @@ public class TorusGameOfLife extends GameOfLife{
         if(row + 1 < previous.length && col + 1 < previous.length && previous[row + 1][col + 1] == 1){
             count++;
         }
-        else if(row + 1 == previous.length && col + 1 == previous.length && previous[0][0] == 1){
-            count++;
+        else if(row + 1 == previous.length){
+            if(col + 1 == previous.length && previous[0][0] == 1) {
+                count++;
+            }
+            else if(col + 1 < previous.length && previous[0][col + 1] == 1){
+                count++;
+            }
+        }
+        else if(col + 1 == previous.length){
+            if(row + 1 >= previous.length && previous[0][0] == 1) {
+                count++;
+            }
+            else if(row + 1 < previous.length && previous[row + 1][0] == 1){
+                count++;
+            }
         }
         return count;
     }
