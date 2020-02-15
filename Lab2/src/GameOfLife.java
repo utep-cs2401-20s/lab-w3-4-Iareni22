@@ -1,21 +1,21 @@
 public class GameOfLife {
-
+    
     int size;
-    boolean[][] board;
-    boolean[][] previous;
+    int[][] board;
+    int[][] previous;
 
     /* Constructors*/
     public GameOfLife() {}
 
     public GameOfLife(int s){
         size = s;
-        board = new boolean[size][size];
-        previous = new boolean[size][size];
+        board = new int[size][size];
+        previous = new int[size][size];
     }
 
-    public GameOfLife(boolean[][] board){
+    public GameOfLife(int[][] board){
         size = board.length;
-        previous = new boolean[size][size];
+        previous = new int[size][size];
         for(int i = 0; i < board.length; i++){
             for(int j = 0; i < board[i].length; j++){
                 previous[i][j] = board[i][j];
@@ -24,7 +24,7 @@ public class GameOfLife {
     }
 
     /* Getters */
-    public boolean[][] getBoard() {
+    public int[][] getBoard() {
         return board;
     }
 
@@ -33,17 +33,17 @@ public class GameOfLife {
         for(int i = 0; i < size; i++) {
             for (int j = 0; i < size; j++) {
                 numNeigh = neighbors(i, j);
-                if(previous[i][j] = true){
+                if(previous[i][j] == 0){
                     if (numNeigh == 2 || numNeigh == 3)
-                        board[i][j] = true;
+                        board[i][j] = 1;
                     else
-                        board[i][j] = false;
+                        board[i][j] = 0;
                 }
                 else{
                     if(numNeigh == 3)
-                        board[i][j] = true;
+                        board[i][j] = 1;
                     else
-                        board[i][j] = false;
+                        board[i][j] = 0;
                 }
             }
         }
@@ -57,48 +57,29 @@ public class GameOfLife {
 
     public int neighbors(int row, int col){ // count live neighbors
         int count = 0;
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                if(board[i][j] == board[row - 1][col - 1]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row - 1][col]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row - 1][col + 1]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row - 1][col]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row][col-1]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row - 1][col + 1]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row + 1][col - 1]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row + 1][col]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else if(board[i][j] == board[row + 1][col + 1]){
-                    if(isAlive(i,j));
-                    count++;
-                }
-                else{
-                    continue;
-                }
-            }
+        if(row - 1 >= 0 && col - 1 >=0 && board[row -1][col - 1] == 1){
+            count++;
+        }
+        if(row - 1 >= 0 && previous[row -1][col] == 1){
+            count++;
+        }
+        if(row - 1 >= 0 && col + 1 < board.length && board[row - 1][col + 1] == 1){
+            count++;
+        }
+        if(col - 1 >= 0 && board[row][col - 1] == 1){
+            count++;
+        }
+        if(col + 1 < board.length && board[row][col + 1] == 1){
+            count++;
+        }
+        if (row + 1 < board.length && col - 1 >= 0 && board[row + 1][col - 1] == 1) {
+            count++;
+        }
+        if(row + 1 >= 0 && board[row + 1][col] == 1){
+            count++;
+        }
+        if(row + 1 < board.length && col + 1 < board.length && previous[row + 1][col + 1] == 1){
+            count++;
         }
         return count;
     }
@@ -110,14 +91,20 @@ public class GameOfLife {
     }
 
     public void printBoard(){
-
+        for(int i = 0; i < size; i++){
+            for(int j = 0; i < size; j++){
+                System.out.print(board[i][j]);
+                if(j == size - 1)
+                    System.out.println();
+            }
+        }
     }
 
-    public boolean isAlive(int row, int col){
-        if(board[row][col])
-            return true;
+    public int isAlive(int row, int col){
+        if(board[row][col] == 1)
+            return 1;
         else
-            return false;
+            return 0;
     }
 
 }// end of class
