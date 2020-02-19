@@ -30,7 +30,7 @@ public class GameOfLife {
         return board;
     }
 
-    public void oneStep(){
+    public void oneStep(){// I received help from Diana Garcia on how this method works and how to set it up
         int numNeigh;
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -57,7 +57,7 @@ public class GameOfLife {
 
     }
 
-    public int neighbors(int row, int col){ // count live neighbors
+    public int neighbors(int row, int col){ // I received help from Javi Rubio, on how to set up the method properly and as to how it functions
         int count = 0;
         if(row - 1 >= 0 && col - 1 >=0 && previous[row -1][col - 1] == 1){
             count++;
